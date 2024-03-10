@@ -37,3 +37,36 @@ class LinkedList:
             total_harga += current.harga * current.jumlah  # Mengalikan harga dengan jumlah pesanan
             current = current.next
         return total_harga
+
+def cetak_struk(pesanan, total):
+    print("\n-------- Struk Pembelian --------")
+    print("No |    Menu          | Harga  | Jumlah | Total")
+    print("-----------------------------------")
+    current = pesanan.head
+    count = 1
+    while current:
+        print(f"{count:2}. | {current.nama_menu:16} | {current.harga:6} | {current.jumlah:6} | {current.harga * current.jumlah:5}  ")
+        current = current.next
+        count += 1
+    print("-----------------------------------")
+    print(f"Total Biaya                    |            {total:5}  ")
+    print("-----------------------------------")
+
+def main():
+    menu_miexue = {
+        "mixue ice cream": 5000,
+        "Boba Shake": 16000,
+        "Mi Sundae": 14000,
+        "Mi Ganas": 11000,
+        "Creamy Mango Boba": 22000
+    }
+
+    pesanan = LinkedList()  # Membuat objek linked list untuk menyimpan pesanan
+
+    while True:
+        print("\nMenu Aplikasi:")
+        print("1. Tambah pesanan ke keranjang")
+        print("2. Tampilkan pesanan yang sudah ditambahkan")
+        print("3. Jumlah harga yang dibayarkan")
+        print("4. Selesai dan cetak struk")
+        print("5. Keluar")
