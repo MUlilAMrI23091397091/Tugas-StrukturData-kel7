@@ -70,3 +70,40 @@ def main():
         print("3. Jumlah harga yang dibayarkan")
         print("4. Selesai dan cetak struk")
         print("5. Keluar")
+
+        pilihan = input("Masukkan nomor pilihan: ")
+
+        if pilihan == '1':  # Pilihan untuk menambah pesanan ke keranjang
+            print("Menu Miexue yang tersedia:")
+            for i, (menu, harga) in enumerate(menu_miexue.items(), 1):  # Menampilkan menu yang tersedia dengan nomor
+                print(f"{i}. {menu}: {harga} rupiah")
+            nomor_menu = input("Masukkan nomor menu yang ingin dipesan (pisahkan dengan koma untuk lebih dari satu menu): ")
+            nomor_menu = [int(n) for n in nomor_menu.split(",")]  # Mengubah input menjadi list nomor menu
+            for nomor in nomor_menu:
+                if 1 <= nomor <= len(menu_miexue):  # Memeriksa apakah nomor menu valid
+                    menu = list(menu_miexue.keys())[nomor - 1]  # Mendapatkan nama menu berdasarkan nomor
+                    # Meminta jumlah pesanan
+                    jumlah = int(input(f"Masukkan jumlah {menu} yang ingin dipesan(urutan sesuai dengan nomor menu yang Anda pesan): "))  
+                    pesanan.tambah_menu(menu, menu_miexue[menu], jumlah)  # Menambahkan menu ke keranjang pesanan
+                    print(f"{menu} x{jumlah} sudah ditambahkan ke keranjang")
+                else:
+                    print(f"Menu nomor {nomor} tidak tersedia")
+        elif pilihan == '2':  # Pilihan untuk menampilkan pesanan yang sudah ditambahkan
+            print("Pesanan yang sudah ditambahkan:")
+            pesanan.tampilkan_pesanan()
+        elif pilihan == '3':  # Pilihan untuk menampilkan total harga yang harus dibayarkan
+            total = pesanan.hitung_total()
+            print(f"Total biaya yang harus dibayarkan adalah {total} rupiah")
+        elif pilihan == '4':  # Pilihan untuk menampilkan struk dan keluar dari aplikasi
+            total = pesanan.hitung_total()  # Menghitung total harga
+            cetak_struk(pesanan, total)
+            print("Terimakasih sudah memesan dan berbelanja di toko kami")
+            break
+        elif pilihan == '5':  # Pilihan untuk keluar dari aplikasi tanpa menampilkan struk
+            print("Terimakasih sudah memesan dan berbelanja di toko kami")
+            break
+        else:
+            print("Pilihan tidak valid, silakan pilih lagi")
+
+if __name__ == "__main__":
+    main()  # Memanggil fungsi utama untuk menjalankan aplikasi
