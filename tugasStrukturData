@@ -1,1 +1,39 @@
+class Node:
+    def __init__(self, nama_menu, harga, jumlah):
+        self.nama_menu = nama_menu  # Menyimpan nama menu
+        self.harga = harga  # Menyimpan harga menu
+        self.jumlah = jumlah  # Menyimpan jumlah pesanan
+        self.next = None  # Menyimpan referensi ke node berikutnya dalam linked list
 
+class LinkedList:
+    def __init__(self):
+        self.head = None
+
+    def tambah_menu(self, nama_menu, harga, jumlah):
+        new_node = Node(nama_menu, harga, jumlah)  # Membuat node baru
+        if not self.head:  # Jika linked list masih kosong
+            self.head = new_node  # Menjadikan node baru sebagai head
+        else:
+            current = self.head
+            while current.next:
+                current = current.next
+            current.next = new_node  # Menambahkan node baru di akhir linked list
+
+    def tampilkan_pesanan(self):
+        current = self.head
+        if not current:  # Jika linked list kosong
+            print("Keranjang pesanan kosong")
+        else:
+            count = 1
+            while current:  # Iterasi untuk menampilkan setiap node
+                print(f"{count}. {current.nama_menu} x{current.jumlah} {current.harga * current.jumlah} rupiah")
+                current = current.next
+                count += 1
+
+    def hitung_total(self):
+        current = self.head
+        total_harga = 0
+        while current:  # Iterasi untuk menjumlahkan harga setiap menu
+            total_harga += current.harga * current.jumlah  # Mengalikan harga dengan jumlah pesanan
+            current = current.next
+        return total_harga
